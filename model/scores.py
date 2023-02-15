@@ -111,11 +111,11 @@ def initScores():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Score(name='Grace', uid='10')
-        u2 = Score(name='Claire', uid='10')
-        u3 = Score(name='Claire', uid='10')
-        u4 = Score(name='Annika', uid='10')
-        u5 = Score(name='Mortensen', uid='10')
+        u1 = Score(name='Shruthi', uid='9/10')
+        u2 = Score(name='Ananya', uid='5/10')
+        u3 = Score(name='Jiya', uid='3/10')
+        u4 = Score(name='Noor', uid='10/10')
+        u5 = Score(name='my mom', uid='9/10')
 
         users = [u1, u2, u3, u4, u5]
 
