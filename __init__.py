@@ -17,6 +17,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURI
 app.config['SECRET_KEY'] = 'SECRET_KEY'
 db = SQLAlchemy()
+# db.drop_all()
+
 Migrate(app, db)
 
 # Images storage

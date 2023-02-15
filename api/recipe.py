@@ -12,7 +12,7 @@ recipe_api = Blueprint('recipe_api', __name__,
 api = Api(recipe_api)
 
 class RecipeAPI:       
-    class _Create(recipe):
+    class _Create(Resource):
         def post(self):
             ''' Read data for json body '''
             body = request.get_json()
@@ -59,7 +59,7 @@ class RecipeAPI:
 
     class _Read(Resource):
         def get(self):
-            recipes = recipe.query.all()    # read/extract all users from database
+            recipes = Recipe.query.all()    # read/extract all users from database
             json_ready = [recipe.read() for recipe in recipes]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 

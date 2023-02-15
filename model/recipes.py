@@ -20,8 +20,9 @@ class Recipe(db.Model):
     __tablename__ = 'recipes'  # table name is plural, class name is singular
 
     # Define the User schema with "vars" from object
-    recipeId = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     _recipeName = db.Column(db.String(255), unique=False, nullable=False)
+    _recipeId = db.Column(db.String(255), unique=False, nullable=False)
     _recipeLink = db.Column(db.String(255), unique=False, nullable=False)
     _recipeType = db.Column(db.String(255), unique=False, nullable=False)
     _reciperecipeCalories = db.Column(db.Integer, unique=False, nullable=False)
@@ -40,7 +41,7 @@ class Recipe(db.Model):
     
     # a setter function, allows name to be updated after initial object creation
     @recipeName.setter
-    def recipeName(self, recipe):
+    def recipeName(self, recipeName):
         self._recipeName = recipeName
     
     # a getter method, extracts email from object
