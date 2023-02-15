@@ -1,7 +1,7 @@
 import threading
 
 # import "packages" from flask
-from flask import render_template  # import render_template from "public" flask libraries
+from flask import render_template, request  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
@@ -12,9 +12,11 @@ from model.users import initUsers
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
 from api.user import user_api # Blueprint import api definition
-
+ 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
+
+from api.nutrition import nutrition_info
 
 # register URIs
 app.register_blueprint(joke_api) # register api routes
@@ -30,6 +32,19 @@ def page_not_found(e):
 @app.route('/')  # connects default URL to index() function
 def index():
     return render_template("index.html")
+
+@app.route('/nutrition/', methods = ["GET", "POST"])
+def nutrition():
+    print("page refreshed")
+    if request.form:
+        input = request.form.get("input")
+        print(input)
+        print("form recieved")
+        if len("input") != 0:
+            output = nutrition_info(input)
+            return render_template("nutrition.html", output=output)
+        
+    return render_template("nutrition.html", output="aAaAa")
 
 @app.route('/stub/')  # connects /stub/ URL to stub() function
 def stub():

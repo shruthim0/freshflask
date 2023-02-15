@@ -1,0 +1,75 @@
+<html>
+<head>
+
+    <title>-</title>
+    <style>
+        body {
+            background-color: #FFF8DC;
+        }
+        
+        .button {
+            background-color:#37FA90;
+            border: none;
+            color: white;
+            padding: 15px 64px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 35px;
+            margin: 115px 265px;
+            cursor: pointer;
+          }
+
+        div.container {
+        background-color:#FF7F50;
+        }
+
+        div.container p {
+        font-family: Georgia;
+        font-size: 50px;
+        font-style: normal;
+        text-align: center;
+        font-weight: normal;
+        text-decoration: underline;
+        text-transform: none;
+        color: #ffffff;
+        background-color:	#DC143C;
+        }
+
+        div.container h5 {
+        text-align: center;
+        font-family: Georgia;
+        }
+
+    </style>
+    <!-- <script type="text/javascript">
+        var test = output;
+        document.getElementByID();
+        
+    </script> -->
+</head>
+
+<body>
+
+    <div class="container">
+    <p>＊*•̩̩͙✩•̩̩͙*˚Nutrition Wizard˚*•̩̩͙✩•̩̩͙*˚＊</p>
+    <h5>“One cannot think well, love well, sleep well if one has not dined well.”</h5>
+    <h5>🥗Enter any ingrediants and get the nutrition facts🥗</h5>
+    <h5>Don't forget to vote!</h5>
+
+
+    <img src="https://www.rti.org/sites/default/files/impact-hero-images/ia_food_hero.jpg" alt="" >
+    
+
+
+    <p >output: {{ output }}</p>    
+    
+    <form id="nutritionbutton" method = "POST" action="/nutrition/">
+        <label for="nutrition">Please enter the ingrediants and their amount(make sure to seperate with comma)</label>
+        <input name="input" id="input">
+        <input type="submit" class="button" value="⭒❃Analyze❃⭒">        
+    </form>
+
+</body>
+</html>
+
