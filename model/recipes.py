@@ -23,6 +23,7 @@ class Recipe(db.Model):
     _recipename = db.Column(db.String(255), unique=False, nullable=False)
     _recipelink = db.Column(db.String(255), unique=False, nullable=False)
     _recipetype = db.Column(db.String(255), unique=False, nullable=False)
+    _recipecuisine = db.Column(db.String(255), unique=False, nullable=False)
 
     # Defines a relationship between Recipe record and Notes table, one-to-many (one recipe to many notes)
 
@@ -31,6 +32,7 @@ class Recipe(db.Model):
         self._recipename = recipename    # variables with self prefix become part of the object, 
         self._recipelink = recipelink
         self._recipetype = recipetype
+        self._recipecuisine = recipecuisine
 
     # a name getter method, extracts name from object
     @property
@@ -58,6 +60,15 @@ class Recipe(db.Model):
     @recipetype.setter
     def recipetype(self, recipetype):
         self._recipetype = recipetype
+
+    # a getter method, extracts link from object
+    @property
+    def recipecuisine(self):
+        return self._recipecuisine
+    # a setter function, allows link to be updated after initial object creation
+    @recipecuisine.setter
+    def recipecuisine(self, recipecuisine):
+        self._recipecuisine = recipecuisine
         
     
     @property
@@ -86,11 +97,12 @@ class Recipe(db.Model):
             "recipename" : self.recipename,
             "recipelink" : self.recipelink,
             "recipetype" : self.recipetype,
+            "recipecuisine" : self.recipecuisine,
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, recipename="", recipelink="", recipetype=""):
+    def update(self, recipename="", recipelink="", recipetype="", recipecuisine=""):
         """only updates values with length"""
         if len(recipename) > 0:
             self.recipename = recipename
@@ -98,6 +110,8 @@ class Recipe(db.Model):
             self.recipelink = recipelink
         if len(recipetype) > 0:
             self.recipetype = recipetype
+        if len(recipecuisine) > 0:
+            self.recipecuisine = recipecuisine
         db.session.commit()
         return self
 
@@ -118,18 +132,18 @@ def initRecipes():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
-        r1 = Recipe(recipename='Avocado Toast', recipelink='link1', recipetype='Breakfast')
-        r2 = Recipe(recipename='Scrambled Eggs', recipelink='link2', recipetype='Breakfast')
-        r3 = Recipe(recipename='Pancake', recipelink='link3', recipetype='Breakfast')
-        r4 = Recipe(recipename='Mac and Cheese', recipelink='link4', recipetype='Lunch')
-        r5 = Recipe(recipename='Panini Sandwich', recipelink='link5', recipetype='Lunch')
-        r6 = Recipe(recipename='Salad', recipelink='link6', recipetype='Lunch')
-        r7 = Recipe(recipename='Minestrone Soup', recipelink='link7', recipetype='Dinner')
-        r8 = Recipe(recipename='Lasagna', recipelink='link8', recipetype='Dinner')
-        r9 = Recipe(recipename='Pasta', recipelink='link9', recipetype='Dinner')
-        r10 = Recipe(recipename='Brownies', recipelink='link10', recipetype='Dessert')
-        r11 = Recipe(recipename='Chocolate Chip Cookies', recipelink='link11', recipetype='Dessert')
-        r12 = Recipe(recipename='Custard Pudding', recipelink='link12', recipetype='Dessert')
+        r1 = Recipe(recipename='Avocado Toast', recipelink='link1', recipetype='Breakfast', recipecuisine='American')
+        r2 = Recipe(recipename='Scrambled Eggs', recipelink='link2', recipetype='Breakfast', recipecuisine='American')
+        r3 = Recipe(recipename='Pancake', recipelink='link3', recipetype='Breakfast', recipecuisine='American')
+        r4 = Recipe(recipename='Mac and Cheese', recipelink='link4', recipetype='Lunch', recipecuisine='American')
+        r5 = Recipe(recipename='Panini Sandwich', recipelink='link5', recipetype='Lunch', recipecuisine='French')
+        r6 = Recipe(recipename='Salad', recipelink='link6', recipetype='Lunch', recipecuisine='Mediterranean')
+        r7 = Recipe(recipename='Minestrone Soup', recipelink='link7', recipetype='Dinner', recipecuisine='Italian')
+        r8 = Recipe(recipename='Lasagna', recipelink='link8', recipetype='Dinner', recipecuisine='Italian')
+        r9 = Recipe(recipename='Pasta', recipelink='link9', recipetype='Dinner', recipecuisine='Italian')
+        r10 = Recipe(recipename='Brownies', recipelink='link10', recipetype='Dessert', recipecuisine='German')
+        r11 = Recipe(recipename='Chocolate Chip Cookies', recipelink='link11', recipetype='Dessert', recipecuisine='American')
+        r12 = Recipe(recipename='Custard Pudding', recipelink='link12', recipetype='Dessert', recipecuisine='German')
     
         recipes = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12]
 

@@ -29,11 +29,16 @@ class RecipeAPI:
             recipetype = body.get('recipetype')
             if recipetype is None or len(recipetype) < 2:
                 return {'message': f'recipetype is missing, or is less than 2 characters'}, 400
+            # validate recipecuisine
+            recipecuisine = body.get('recipecuisine')
+            if recipecuisine is None or len(recipecuisine) < 2:
+                return {'message': f'recipetype is missing, or is less than 2 characters'}, 400
 
             ''' #1: Key code block, setup USER OBJECT '''
             ro = Recipe(recipename=recipename, 
                       recipelink=recipelink,
-                      recipetype=recipetype)
+                      recipetype=recipetype,
+                      recipecuisine=recipecuisine)
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
