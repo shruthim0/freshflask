@@ -28,7 +28,7 @@ class Recipe(db.Model):
     # Defines a relationship between Recipe record and Notes table, one-to-many (one recipe to many notes)
 
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, recipename, recipelink, recipetype):
+    def __init__(self, recipename, recipelink, recipetype, recipecuisine):
         self._recipename = recipename    # variables with self prefix become part of the object, 
         self._recipelink = recipelink
         self._recipetype = recipetype

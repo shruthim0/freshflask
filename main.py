@@ -28,7 +28,7 @@ app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
 app.register_blueprint(score_api)
-app.register.blueprint(recipe_api)
+app.register_blueprint(recipe_api)
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
