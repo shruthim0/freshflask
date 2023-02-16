@@ -108,7 +108,6 @@ class Score(db.Model):
 def initScores():
     with app.app_context():
         """Create database and tables"""
-        db.init_app(app)
         db.create_all()
         """Tester data for table"""
         u1 = Score(name='Shruthi', uid='9/10')
