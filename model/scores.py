@@ -21,15 +21,15 @@ class Score(db.Model):
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=False, nullable=False)
-    _uid = db.Column(db.String(255), unique=False, nullable=False)
+    _score = db.Column(db.String(255), unique=False, nullable=False)
 
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     # posts = db.relationship("Post", cascade='all, delete', backref='scores', lazy=True)
 
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, name, uid):
+    def __init__(self, name, score):
         self._name = name    # variables with self prefix become part of the object, 
-        self._uid = uid
+        self._score = score
 
     # a name getter method, extracts name from object
     @property
@@ -43,17 +43,17 @@ class Score(db.Model):
     
     # a getter method, extracts email from object
     @property
-    def uid(self):
-        return self._uid
+    def score(self):
+        return self._score
     
     # a setter function, allows name to be updated after initial object creation
-    @uid.setter
-    def uid(self, uid):
-        self._uid = uid
+    @score.setter
+    def score(self, score):
+        self._score = score
         
-    # check if uid parameter matches user id in object, return boolean
-    def is_uid(self, uid):
-        return self._uid == uid
+    # check if score parameter matches user id in object, return boolean
+    def is_score(self, score):
+        return self._score == score
     
     @property
     # output content using str(object) in human readable form, uses getter
@@ -79,17 +79,17 @@ class Score(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "uid": self.uid
+            "score": self.score
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, name="", uid=""):
+    def update(self, name="", score=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
-        if len(uid) > 0:
-            self.uid = uid
+        if len(score) > 0:
+            self.score = score
         db.session.commit()
         return self
 
@@ -110,11 +110,11 @@ def initScores():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
-        u1 = Score(name='Shruthi', uid='9/10')
-        u2 = Score(name='Ananya', uid='5/10')
-        u3 = Score(name='Jiya', uid='3/10')
-        u4 = Score(name='Noor', uid='10/10')
-        u5 = Score(name='my mom', uid='9/10')
+        u1 = Score(name='Shruthi', score='9/10')
+        u2 = Score(name='Ananya', score='5/10')
+        u3 = Score(name='Jiya', score='3/10')
+        u4 = Score(name='Noor', score='10/10')
+        u5 = Score(name='my mom', score='9/10')
 
         users = [u1, u2, u3, u4, u5]
 
@@ -129,4 +129,4 @@ def initScores():
             except IntegrityError:
                 '''fails with bad or duplicate data'''
                 db.session.remove()
-                print(f"Records exist, duplicate email, or error: {user.uid}")
+                print(f"Records exist, duplicate email, or error: {user.score}")
