@@ -16,7 +16,7 @@ from sqlalchemy.exc import IntegrityError
 # -- b.) Recipe represents data we want to store, something that is built on db.Model
 # -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
 class Fridge(db.Model):
-    __tablename__ = 'recs'  # table name is plural, class name is singular
+    __tablename__ = 'fridges'  # table name is plural, class name is singular
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, unique=True, primary_key=True)
@@ -72,8 +72,8 @@ class Fridge(db.Model):
     def read(self):
         return {
             "id": self.id,
-            "recipename" : self.recname,
-            "recipelink" : self.reclink,
+            "recname" : self.recname,
+            "reclink" : self.reclink,
         }
 
     # CRUD update: updates user name, password, phone
@@ -99,7 +99,7 @@ class Fridge(db.Model):
 
 
 # Builds working data for testing
-def initRecs():
+def initFridges():
     with app.app_context():
         """Create database and tables"""
         db.create_all()
@@ -115,11 +115,11 @@ def initRecs():
         r9 = Fridge(recname='Garlic Butter Shrimp', reclink='https://www.acouplecooks.com/garlic-butter-shrimp/')
         r10 = Fridge(recname='Mediterranean Tuna Salad', reclink='https://www.acouplecooks.com/mediterranean-tuna-salad/')
     
-        recs = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10]
+        fridges = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10]
 
-        for rec in recs:
+        for fridge in fridges:
             try:
-                rec.create()
+                fridge.create()
             except IntegrityError:
                 db.session.remove()
-                print(f"Records exist, duplicate email, or error: {rec.model}")
+                print(f"Records exist, duplicate email, or error: {fridge.model}")
