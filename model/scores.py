@@ -92,11 +92,11 @@ def initScores():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Score(name='Shruthi', score='7')
-        u2 = Score(name='Ananya', score='7')
-        u3 = Score(name='Noor', score='7')
-        u4 = Score(name='Jiya', score='7')
-        u5 = Score(name='Jasmine', score='7')
+        u1 = Score(name='Shruthi', score='6')
+        u2 = Score(name='Ananya', score='6')
+        u3 = Score(name='Noor', score='6')
+        u4 = Score(name='Jiya', score='6')
+        u5 = Score(name='Jasmine', score='6')
 
         users = [u1, u2, u3, u4, u5]
 
