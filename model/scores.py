@@ -7,24 +7,14 @@ from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
 
 
-''' Tutorial: https://www.sqlalchemy.org/library.html#tutorials, try to get into Python shell and follow along '''
-
-
-# Define the User class to manage actions in the 'users' table
-# -- Object Relational Mapping (ORM) is the key concept of SQLAlchemy
-# -- a.) db.Model is like an inner layer of the onion in ORM
-# -- b.) User represents data we want to store, something that is built on db.Model
-# -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
+# Define the Score class to manage actions in the 'score' table
 class Score(db.Model):
-    __tablename__ = 'scores'  # table name is plural, class name is singular
+    __tablename__ = 'scores1' 
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=False, nullable=False)
     _score = db.Column(db.String(255), unique=False, nullable=False)
-
-    # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
-    # posts = db.relationship("Post", cascade='all, delete', backref='scores', lazy=True)
 
     # constructor of a User object, initializes the instance variables within object (self)
     def __init__(self, name, score):
@@ -41,31 +31,24 @@ class Score(db.Model):
     def name(self, name):
         self._name = name
     
-    # a getter method, extracts email from object
     @property
     def score(self):
         return self._score
     
-    # a setter function, allows name to be updated after initial object creation
     @score.setter
     def score(self, score):
         self._score = score
         
-    # check if score parameter matches user id in object, return boolean
     def is_score(self, score):
         return self._score == score
     
     @property
-    # output content using str(object) in human readable form, uses getter
-    # output content using json dumps, this is ready for API response
     def __str__(self):
         return json.dumps(self.read())
 
-    # CRUD create/add a new record to the table
-    # returns self or None on error
     def create(self):
         try:
-            # creates a person object from User(db.Model) class, passes initializers
+            # creates a person object from Score(db.Model) class, passes initializers
             db.session.add(self)  # add prepares to persist person object to Users table
             db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
             return self
@@ -103,18 +86,17 @@ class Score(db.Model):
 
 """Database Creation and Testing """
 
-
-# Builds working data for testing
 def initScores():
     with app.app_context():
         """Create database and tables"""
+        db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Score(name='Shruthi', score='9/10')
-        u2 = Score(name='Ananya', score='5/10')
-        u3 = Score(name='Jiya', score='3/10')
-        u4 = Score(name='Noor', score='10/10')
-        u5 = Score(name='my mom', score='9/10')
+        u1 = Score(name='Shruthi', score='7')
+        u2 = Score(name='Ananya', score='7')
+        u3 = Score(name='Noor', score='7')
+        u4 = Score(name='Jiya', score='7')
+        u5 = Score(name='Jasmine', score='7')
 
         users = [u1, u2, u3, u4, u5]
 
