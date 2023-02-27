@@ -76,13 +76,6 @@ class Score(db.Model):
         db.session.commit()
         return self
 
-    # CRUD delete: remove self
-    # None
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-        return None
-
 
 """Database Creation and Testing """
 
