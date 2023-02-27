@@ -111,4 +111,4 @@ def initScores():
             except IntegrityError:
                 '''fails with bad or duplicate data'''
                 db.session.remove()
-                print(f"Records exist, duplicate email, or error: {user.score}")
+                print(f"Records exist, duplicate email or error: {user.score}")
