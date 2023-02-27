@@ -76,6 +76,13 @@ class Score(db.Model):
         db.session.commit()
         return self
 
+    # CRUD delete: remove self
+    # None
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
 
 """Database Creation and Testing """
 
@@ -86,10 +93,10 @@ def initScores():
         db.create_all()
         """Tester data for table"""
         u1 = Score(name='Shruthi', score='6')
-        u2 = Score(name='Ananya', score='6')
-        u3 = Score(name='Noor', score='6')
-        u4 = Score(name='Jiya', score='6')
-        u5 = Score(name='Jasmine', score='6')
+        u2 = Score(name='Kat', score='2')
+        u3 = Score(name='Kenna', score='5')
+        u4 = Score(name='Claire', score='1')
+        u5 = Score(name='Grace', score='3')
 
         users = [u1, u2, u3, u4, u5]
 
