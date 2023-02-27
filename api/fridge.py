@@ -45,7 +45,14 @@ class FridgeAPI:
             json_ready = [fridge.read() for fridge in fridges]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
     
+    class _Delete(Resource):
+        def delete(self):
+            db.session.query(Score).delete()
+            db.session.commit()
+            return {'message': 'All scores have been deleted.'}
+            
 
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
+    api.add_resource(_Delete, '/delete')
