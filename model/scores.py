@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 
 # Define the Score class to manage actions in the 'score' table
 class Score(db.Model):
-    __tablename__ = 'scores1' 
+    __tablename__ = 'scores' 
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
