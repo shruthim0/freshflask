@@ -1,6 +1,7 @@
 import threading
 # import "packages" from flask
 from flask import render_template, request  # import render_template from "public" flask libraries
+import sqlite3
 
 # import "packages" from "this" project
 from __init__ import app, db  # Definitions initialization
