@@ -51,7 +51,7 @@ class ScoreAPI:
         def delete(self):
             body = request.get_json()
             score = body.get('score')
-            score = Score.query.get(score)
+            score = Score.query.get(body)
             score.delete()
             return f"{score.read()} Has been deleted"
             
