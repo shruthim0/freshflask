@@ -92,11 +92,11 @@ def initScores():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Score(name='Shruthi', score='6')
-        u2 = Score(name='Kat', score='2')
-        u3 = Score(name='Kenna', score='5')
-        u4 = Score(name='Claire', score='1')
-        u5 = Score(name='Grace', score='3')
+        u1 = Score(name='Shruthi', score='2')
+        u2 = Score(name='Claire', score='3')
+        u3 = Score(name='Grace', score='1')
+        u4 = Score(name='Noor', score='5')
+        u5 = Score(name='Jiya', score='6')
 
         users = [u1, u2, u3, u4, u5]
 
@@ -111,4 +111,4 @@ def initScores():
             except IntegrityError:
                 '''fails with bad or duplicate data'''
                 db.session.remove()
-                print(f"Records exist, duplicate email or error: {user.score}")
+                print(f"Records exist, duplicate email, or error: {user.score}")
