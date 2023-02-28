@@ -55,7 +55,7 @@ def activate_job():
     db.init_app(app)
     initJokes()
     initUsers()
-    initScores()
+    # initScores()
     initRecipes()
     initFridges()
     initNutrition()
