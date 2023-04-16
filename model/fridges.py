@@ -16,59 +16,56 @@ from sqlalchemy.exc import IntegrityError
 # -- b.) Recipe represents data we want to store, something that is built on db.Model
 # -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
 class Fridge(db.Model):
-    __tablename__ = 'fridges'  # table name is plural, class name is singular
+    __tablename__ = 'fridges'  # creates the table
 
-    # Define the User schema with "vars" from object
+    # defines the User schema
     id = db.Column(db.Integer, unique=True, primary_key=True)
     _recname = db.Column(db.String(255), unique=False, nullable=False)
     _reclink = db.Column(db.String(255), unique=False, nullable=False)
 
-    # Defines a relationship between Recipe record and Notes table, one-to-many (one recipe to many notes)
 
-    # constructor of a User object, initializes the instance variables within object (self)
+
+    # initializes the instance variables within object (self)
     def __init__(self, recname, reclink):
         self._recname = recname    # variables with self prefix become part of the object, 
         self._reclink = reclink
 
-    # a name getter method, extracts name from object
+    # extracts the recipe name
     @property
     def recname(self):
         return self._recname
-    # a setter function, allows name to be updated after initial object creation
+    # allows the name to be updated
     @recname.setter
     def recname(self, recname):
         self._recname = recname
         
-    # a getter method, extracts link from object
+    # axtracts the recipe link
     @property
     def reclink(self):
         return self._reclink
-    # a setter function, allows link to be updated after initial object creation
+    # allows the link to be updated
     @reclink.setter
     def reclink(self, reclink):
         self._reclink = reclink
         
     
     @property
-    # output content using str(object) in human readable form, uses getter
-    # output content using json dumps, this is ready for API response
+    # readable output
+    # prep for API response
     def __str__(self):
         return json.dumps(self.read())
 
-    # CRUD create/add a new record to the table
-    # returns self or None on error
+    # Create: adds a new recipe to the table
     def create(self):
         try:
-            # creates a person object from User(db.Model) class, passes initializers
-            db.session.add(self)  # add prepares to persist person object to Users table
-            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            db.session.add(self)
+            db.session.commit()
             return self
         except IntegrityError:
             db.session.remove()
-            return None
+            return None # returns "none" or what is enetered if there is an error
 
-    # CRUD read converts self to dictionary
-    # returns dictionary
+    # Read: converts the data into a dictionary
     def read(self):
         return {
             "id": self.id,
@@ -76,10 +73,8 @@ class Fridge(db.Model):
             "reclink" : self.reclink,
         }
 
-    # CRUD update: updates user name, password, phone
-    # returns self
+    # Update: updates recipe entered
     def update(self, recname="", reclink=""):
-        """only updates values with length"""
         if len(recname) > 0:
             self.recname = recname
         if len(reclink) > 0:
@@ -87,8 +82,7 @@ class Fridge(db.Model):
         db.session.commit()
         return self
 
-    # CRUD delete: remove self
-    # None
+    # Delete: removes recipe
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -117,6 +111,7 @@ def initFridges():
     
         fridges = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10]
 
+        # creates sample table of data
         for fridge in fridges:
             try:
                 fridge.create()
