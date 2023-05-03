@@ -13,10 +13,9 @@ api = Api(fridge_api)
 class FridgeAPI:        
     class _Create(Resource):
         def post(self):
-            ''' Read data for json body '''
             body = request.get_json()
             
-            ''' Avoid garbage in, error checking '''
+            # error checking
             # validate recipename
             recname = body.get('recname')
             if recname is None or len(recname) < 2:
@@ -26,14 +25,13 @@ class FridgeAPI:
             if reclink is None or len(reclink) < 2:
                 return {'message': f'reclink is missing, or is less than 2 characters'}, 400
 
-            ''' #1: Key code block, setup USER OBJECT '''
+            # sets up the recipe in the database
             ro = Fridge(recname=recname, 
                       reclink=reclink)
             
-            ''' #2: Key Code block to add user to database '''
-            # create user in database
+            # create recipe in database
             fridge = ro.create()
-            # success returns json of user
+            # success returns json of recipe
             if fridge:
                 return jsonify(fridge.read())
             # failure returns error
@@ -41,34 +39,34 @@ class FridgeAPI:
 
     class _Read(Resource):
         def get(self):
-            fridges = Fridge.query.all()    # read/extract all users from database
-            json_ready = [fridge.read() for fridge in fridges]  # prepare output in json
-            return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+            fridges = Fridge.query.all()    # extracts all recipes from database
+            json_ready = [fridge.read() for fridge in fridges]  # prepares output in json
+            return jsonify(json_ready) 
     
+            # deletes recipes from table
     class _Delete(Resource):
         def delete(self):
-            db.session.query(Score).delete()
-            db.session.commit()
-            return {'message': 'All scores have been deleted.'}
+            Fridge.session.query(self).delete()
+            Fridge.session.commit()
+            return {'message': 'All recipes have been deleted.'}
 
     class _Security(Resource):
 
         def post(self):
-            ''' Read data for json body '''
             body = request.get_json()
             
-            ''' Get Data '''
+            # fetches the data
             _recname = body.get('recname')
             if _recname is None or len(_recname) < 2:
                 return {'message': f'recipe name is missing, or is less than 2 characters'}, 400
             _reclink = body.get('reclink')
             
-            ''' Find user '''
-            user = User.query.filter_by(_uid=uid).first()
+            # finds the recipe
+            user = Fridge.query.filter_by(_recname).first()
             if user is None or not user.is_reclink(_reclink):
                 return {'message': f"Invalid recipe or link"}, 400
             
-            ''' authenticated user '''
+            # authenticates the recipe
             return jsonify(user.read())
 
     # building RESTapi endpoint
