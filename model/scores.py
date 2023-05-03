@@ -83,7 +83,6 @@ class Score(db.Model):
         db.session.commit()
         return None
 
-
 """Database Creation and Testing """
 
 def initScores():
@@ -93,10 +92,10 @@ def initScores():
         db.create_all()
         """Tester data for table"""
         u1 = Score(name='Shruthi', score='2')
-        u2 = Score(name='Claire', score='3')
-        u3 = Score(name='Grace', score='1')
-        u4 = Score(name='Noor', score='5')
-        u5 = Score(name='Jiya', score='6')
+        u2 = Score(name='Lina', score='3')
+        u3 = Score(name='Lydia', score='1')
+        u4 = Score(name='Sarah', score='5')
+        u5 = Score(name='Jake', score='6')
 
         users = [u1, u2, u3, u4, u5]
 
